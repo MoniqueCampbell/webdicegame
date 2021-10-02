@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="author" content="Monique Campbell">
+    <meta name="description" content="This is a Website Dice Game that allows a player to roll a dice and determines if they win by comparing it with the random number generated (1 to 6).">
+    <title>Dice Game</title>
+
+    <!-- Websites used for Coding and Background Reference: 
+    https://www.w3schools.com/
+    https://pixabay.com/photos/dice-six-gambling-to-play-689618/-->
+  </head>
+
+  <style>
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+
+    body {
+      background-image: url('background.jpg');
+      background-size: cover;
+      color: white;
+      padding: 15px;
+    }
+
+    h1{
+      font-size: 3em;
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    button{
+      border-radius: 15px;
+      transition-duration: 0.4s;
+      padding: 10px 25px;
+      text-align: center;
+      font-size: 15px;
+      border-color: white;
+      border-width: 2px;
+      border-style: solid;
+    }
+
+    #reset{
+      background-color: red; 
+      color: white;    
+    }
+
+    #reset:hover{
+      background-color: white; 
+      color: red;  
+    }
+
+    p, span{
+      font-size: 1.5em;
+    }
+
+    #s_board{
+      font-size: 2em;
+      text-decoration: underline;
+    }
+
+    div{
+      display: flex;
+    }
+  </style>
+
+  <body>
+    <h1>Welcome to Dice Game</h1><br>
+    <p><strong>Instructions: </strong>Click on the button below that says, "Roll Dice" to roll the dice. If your dice rolled the exact number as the number generated you win:&nbsp;&nbsp;&nbsp;<button id="rdice" onclick="ranNum()"><strong>Roll Dice</strong></button></p><br><br>
+    <p id="s_board"><strong>Scoreboard</strong></p>
+
+    <div>
+      <p><strong>Number of Wins:&nbsp;</strong></p><span id="win"></span>&emsp;&emsp;&emsp;&emsp;
+      <p><strong>Times Lost:&nbsp;</strong></p><span id="lost"></span>&emsp;&emsp;&emsp;&emsp;
+      <button onclick="reset()" id="reset"><strong>Reset</strong></button>
+    </div>
+    <br>
+    <div>
+      <p><strong>Dice Roll Number:&nbsp;</strong></p><span id="pnum"></span>
+    </div>
+    <div>
+      <p><strong>Generated Number:&nbsp;</strong></p><span id="cnum"></span>
+    </div>
+    <div>
+      <p><strong>Result:&nbsp;</strong></p><span id="result"></span>
+    </div>
+
+    <script>
+      var win = 0;
+      var lost = 0;
+      document.getElementById("win").innerHTML = win;
+      document.getElementById("lost").innerHTML = lost;
+      function ranNum() {
+        var x = document.getElementById("pnum");
+        x.innerHTML = Math.floor((Math.random() * 6) + 1);
+        var y = document.getElementById("cnum")
+        y.innerHTML = Math.floor((Math.random() * 6) + 1);
+        var x = document.getElementById("pnum").innerText;
+        var y = document.getElementById("cnum").innerText;
+        if (x===y) {
+          document.getElementById("result").innerHTML = "You are a Winner!!!";
+          win=win+1;
+          document.getElementById("win").innerHTML = win;
+        }else{
+          document.getElementById("result").innerHTML = "You Lose!";
+          lost=lost+1;
+          document.getElementById("lost").innerHTML = lost;
+        }
+      }
+
+      function reset(){
+        if (confirm("You are about to reset your score!")){
+          win=0;
+          lost=0;
+          document.getElementById("win").innerHTML = win;
+          document.getElementById("lost").innerHTML = lost;
+        }
+      }
+    </script>
+  </body>
+</html>
